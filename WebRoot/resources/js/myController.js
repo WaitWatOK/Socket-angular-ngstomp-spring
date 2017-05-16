@@ -14,6 +14,10 @@ var myapp = angular.module('myindex',['myApp.services']).run(['$http','$rootScop
 			console.error(message);
 			$rootScope.msgfromServer = message.body;
 		});
+		$rootScope.client.subscribe('/user/queue/personalgreetings',function(message){
+			console.error(message);
+			$rootScope.personalmsgfromServer = message.body;
+		});
 	},function(frames){
 		console.error(frames);
 	});

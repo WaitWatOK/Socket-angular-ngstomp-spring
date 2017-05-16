@@ -29,5 +29,7 @@
     <br><br><br>
     <textarea name="a" style="width:200px;height:80px;" ng-model="msgfromServer" readonly></textarea>
     
+    <textarea name="a" style="width:200px;height:80px;" ng-model="personalmsgfromServer" readonly></textarea>
+    
   </body>
 </html>

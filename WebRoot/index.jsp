@@ -1,26 +1,44 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+request.setAttribute("jsPath", request.getContextPath()+"/resources/js");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <title>Stomp Over SocketJS</title>
+		<script src="${jsPath}/websocket/jquery.js"></script>
+	<!-- websocket框架 -->
+	<script src="${jsPath}/websocket/sockjs-0.3.min.js"></script>
+	<script src="${jsPath}/websocket/stomp.js"></script>
+	<script type="text/javascript">
+		function connect(){
+			$.ajax({});
+			var ws = new SockJS("http://127.0.0.1:8080/SocketDemo/watpoint");
+			var client= Stomp.over(ws);
+			var on_connect = function() {
+			    console.log('connected');
+			};
+			var on_error =  function() {
+			    console.log('error');
+			};
+			client.connect('guest', 'guest', on_connect, on_error);
+		}
+		
+		function disconnect(){
+			var ws = new SockJS("http://127.0.0.1:8080/SocketDemo/watpoint");
+			var client= Stomp.over(ws);
+			var on_disconnect = function() {
+			    console.log('connected');
+			};
+			client.disconnect(on_disconnect);
+		}
+	</script>
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <button id="conn" type="button" onclick="connect()">连接</button>
+    <button id="disconn" type="button" onclick="disconnect()">断开连接</button>
   </body>
 </html>
