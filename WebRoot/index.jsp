@@ -14,20 +14,23 @@ request.setAttribute("jsPath", request.getContextPath()+"/resources/js");
 	<script src="${jsPath}/websocket/stomp.js"></script>
 	<script type="text/javascript">
 		function connect(){
-			$.ajax({});
-			var ws = new SockJS("http://127.0.0.1:8080/SocketDemo/watpoint");
+			var ws = new SockJS("/SocketDemo/watpoint");
+				console.warn(ws)
 			var client= Stomp.over(ws);
+				console.warn(client)
 			var on_connect = function() {
 			    console.log('connected');
 			};
 			var on_error =  function() {
 			    console.log('error');
 			};
-			client.connect('guest', 'guest', on_connect, on_error);
+			client.connect('guest', 'guest', function(frame){
+				console.warn(frame)
+			}, on_error);
 		}
 		
 		function disconnect(){
-			var ws = new SockJS("http://127.0.0.1:8080/SocketDemo/watpoint");
+			var ws = new SockJS("/SocketDemo/watpoint");
 			var client= Stomp.over(ws);
 			var on_disconnect = function() {
 			    console.log('connected');

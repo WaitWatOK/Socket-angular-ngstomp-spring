@@ -25,6 +25,9 @@
     <!-- <a href="getName.action">GetName</a>
     <br> -->
     <input type="text" ng-model="message">
+    <select>
+    	<option  ng-repeat="x in users">{{x}}</option>
+    </select>
     <input type="button" ng-click="sendmsg()" value="Send">
     <br><br><br>
     <textarea name="a" style="width:200px;height:80px;" ng-model="msgfromServer" readonly></textarea>

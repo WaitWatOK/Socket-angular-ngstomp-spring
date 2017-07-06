@@ -27,10 +27,11 @@ public class WebSocketConfig extends  AbstractSessionWebSocketMessageBrokerConfi
 		registry.addEndpoint("/watpoint").setHandshakeHandler(new MyHandshakeHandler()).addInterceptors(new HttpSessionHandshakeInterceptor()).withSockJS();
 	}
 	
+	
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
          registry.enableSimpleBroker("/queue/", "/notify/");
          registry.setApplicationDestinationPrefixes("/app");
          
- }
+	}
 
 }

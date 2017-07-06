@@ -7,15 +7,22 @@ var myapp = angular.module('myindex',['myApp.services']).run(['$http','$rootScop
 	//socket连接
 	$rootScope.client.connect('guest', 'guest',function(frames){
 		$rootScope.client.subscribe('/app/firstconn',function(message){
-			console.warn(message);
 			$rootScope.msgfromServer = message.body;
+			var arr = message.body.split("-");
+			arr.forEach(function(item,index){
+				console.error(item+"-"+index);
+				if(!item){
+					arr.splice(index,1);
+				}
+			});
+			$rootScope.users = arr;
+			console.error(arr);
 		});
 		$rootScope.client.subscribe('/queue/greetings',function(message){
+			alert(message)
 			console.error(message);
-			$rootScope.msgfromServer = message.body;
 		});
 		$rootScope.client.subscribe('/user/queue/personalgreetings',function(message){
-			console.error(message);
 			$rootScope.personalmsgfromServer = message.body;
 		});
 	},function(frames){
